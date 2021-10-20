@@ -59,8 +59,11 @@ def run(config):
 
         with open(outfilename, mode='a') as f:
             f.write(str(timestamp))
-            for ch in chs:
-                f.write(','+"{:>5}".format(ch.value))
+            for ch, typ in zip(chs, types):
+                if typ == 'raw':
+                    f.write(','+"{:>5}".format(ch.value))
+                if typ == 'volt':
+                    f.write(','+"{:>5.3f}".format(ch.voltage))
             f.write('\n')
 
         time.sleep(config['time_interval_sec'])
@@ -70,4 +73,8 @@ def get_outfilename(config, config_hash, date):
 
     if config['naming'] == "head-date-hash":
         outfilename = config['file_header'] + "-" + date + "-" + config_hash + ".txt"
+    if config['naming'] == "date-hash":
+        outfilename = date + "-" + config_hash + ".txt"
+    if config['naming'] == "hash":
+        outfilename = config_hash + ".txt"
     return outfilename
