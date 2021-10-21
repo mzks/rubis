@@ -1,5 +1,4 @@
 {
-    "config_file": "default_config",
         "path": "./",
         "file_header": "sc",
         "naming": "head-date-hash",
