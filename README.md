@@ -47,6 +47,7 @@ Edit them, then run `rubis -c custom_config.json`.
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
 | `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
 | `time_format`  | Time column format | "timestamp", "datetime" (default), or strftime format (for example, "%H:%M:%S")                                              |                  |
+| `boards`           | Setting for each ADS1115 board        | `"gain"` option is available                                                                |                  |
 | `sources`           | Setting for each channels        |                                                                 |                  |
 
 The sources should be set like,
@@ -57,5 +58,6 @@ The sources should be set like,
     "type": "raw"
     },
 ```
-The `name` is used for csv header. For the `type`, `"raw"`, `"millivolt"`, and `"volt"` are available.
+The `name` is used for csv header. For the `type`, `"volt"`, `"raw"`, `"millivolt"`, and `"linear"` are available.
+`"linear"` returns the value `"a" * (volt) + "b"`. The "a" and "b" should be written in the config file, for each sources..
 

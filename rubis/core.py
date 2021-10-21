@@ -26,19 +26,18 @@ def run(config):
 
     adss = [ADS.ADS1115(i2c, address=board_address[str(board_id)]) for board_id in config['available_boards']]
     chs = []
-    for ads in adss:
-        ads.gain = 1
+    for ads, board_id in zip(adss, config['available_boards']):
+        ads.gain = config['board'][str(board_id)]['gain']
         chs.append(AnalogIn(ads, ADS.P0))
         chs.append(AnalogIn(ads, ADS.P1))
         chs.append(AnalogIn(ads, ADS.P2))
         chs.append(AnalogIn(ads, ADS.P3))
 
-    names, types = [], []
+    sources = []
     for board_id in config['available_boards']:
         for ch in range(4):
             ch_id = str((int(board_id) - 1) * 4 + ch + 1)
-            names.append(config['sources'][ch_id]['name'])
-            types.append(config['sources'][ch_id]['type'])
+            sources.append(config['sources'][ch_id])
 
     print('Data taking on the hash '+config_hash)
 
@@ -58,20 +57,22 @@ def run(config):
         if not os.path.isfile(outfilename):
             with open(outfilename, mode='a') as f:
                 f.write('time')
-                for name in names:
-                    f.write(',' + name)
+                for source in sources:
+                    f.write(',' + source['name'])
                 f.write('\n')
                 
 
         with open(outfilename, mode='a') as f:
             f.write(time_str)
-            for ch, typ in zip(chs, types):
-                if typ == 'raw':
+            for ch, s in zip(chs, sources):
+                if s['type'] == 'raw':
                     f.write(','+"{:>5}".format(ch.value))
-                elif (typ == 'volt') or (typ == 'V'):
+                elif (s['type'] == 'volt') or (s['type'] == 'V'):
                     f.write(', '+"{:>5.7f}".format(ch.voltage))
-                elif typ == 'millivolt' or (typ == 'mV'):
+                elif s['type'] == 'millivolt' or (s['type'] == 'mV'):
                     f.write(', '+"{:>5.4f}".format(ch.voltage*1.e3))
+                elif s['type'] == 'linear':
+                    f.write(', '+"{:>5.4f}".format(ch.voltage*s['a']+s['b']))
                 else:
                     f.write(', ')
             f.write('\n')
