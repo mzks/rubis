@@ -33,3 +33,5 @@ The `rubis` binary will be provided at `~/.local/bin/rubis`
 When you execute `rubis` without option, default configurations will be used.
 You can use your custom configuration file with `-f` option.
 Some options can be overwrited with options.
+
+`rubis -g` generates template config file.
