@@ -46,6 +46,7 @@ Edit them, then run `rubis -c custom_config.json`.
 | `naming`            | Naming style of file             | 'head-date-hash', 'head-hash', 'date-hash', 'hash', 'head-date' | -n               |
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
 | `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
+| `output`  | Output format | `"csv"`, `"db"`, or `"both"`                                      |                  |
 | `time_format`  | Time column format | "timestamp", "datetime" (default), or strftime format (for example, "%H:%M:%S")                                              |                  |
 | `boards`           | Setting for each ADS1115 board        | `"gain"` option is available                                                                |                  |
 | `sources`           | Setting for each channels        |                                                                 |                  |
@@ -55,9 +56,22 @@ The sources should be set like,
 "1":{
     "name": "ch1",
     "description": "channel 1",
-    "type": "raw"
+    "type": "volt"
+    },
+"2":{
+    "name": "ch2",
+    "description": "channel 2",
+    "type": "linear"
+    "a": 2.0,
+    "b": 1.2
     },
 ```
 The `name` is used for csv header. For the `type`, `"volt"`, `"raw"`, `"millivolt"`, and `"linear"` are available.
-`"linear"` returns the value `"a" * (volt) + "b"`. The "a" and "b" should be written in the config file, for each sources..
+`"linear"` returns the value `"a" * (volt) + "b"`. The "a" and "b" should be written in the config file, for each sources.
 
+If you set `"db"` for `output`, the following settings are required.
+```
+"db":{
+
+     }
+```

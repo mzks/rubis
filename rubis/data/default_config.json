@@ -5,6 +5,7 @@
         "time_interval_sec": 10,
         "time_format" : "datetime",
         "available_boards": [1,2,3,4],
+        "output": "both",
         "boards":{
             "1":{
                 "gain": 1
@@ -100,5 +101,15 @@
                 "description": "channel 16",
                 "type": "volt"
             }
+        },
+        "db":{
+            "login":{
+                "host": "127.0.0.1",
+                "port": 3306,
+                "user": "root",
+                "passwd": "newpassword",
+                "autocommit": true}
+            },
+            "name": "rubis"
         }
 }
