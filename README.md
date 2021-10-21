@@ -46,6 +46,7 @@ Edit them, then run `rubis -c custom_config.json`.
 | `naming`            | Naming style of file             | 'head-date-hash', 'head-hash', 'date-hash', 'hash', 'head-date' | -n               |
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
 | `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
+| `time_format`  | Time column format | "timestamp" (default), "datetime", or strftime format (for example, "%H:%M:%S")                                              |                  |
 | `sources`           | Setting for each channels        |                                                                 |                  |
 
 The sources should be set like,

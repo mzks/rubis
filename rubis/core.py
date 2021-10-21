@@ -45,20 +45,26 @@ def run(config):
     while True:
         now = datetime.datetime.now()
         date = now.strftime("%Y%m%d")
-        timestamp = int(now.timestamp())
+        if config['time_format'] == 'timestamp':
+            time_str = str(int(now.timestamp()))
+        elif config['time_format'] == 'datetime':
+            time_str = now.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            time_str = now.strftime(config['time_format'])
+            
         outfilename = get_outfilename(config, config_hash, date)
 
         # File existance check
         if not os.path.isfile(outfilename):
             with open(outfilename, mode='a') as f:
-                f.write('timestamp')
+                f.write('time')
                 for name in names:
                     f.write(',' + name)
                 f.write('\n')
                 
 
         with open(outfilename, mode='a') as f:
-            f.write(str(timestamp))
+            f.write(time_str)
             for ch, typ in zip(chs, types):
                 if typ == 'raw':
                     f.write(','+"{:>5}".format(ch.value))
@@ -75,12 +81,12 @@ def get_outfilename(config, config_hash, date):
 
     if config['naming'] == "head-date-hash":
         outfilename = config['file_header'] + "-" + date + "-" + config_hash + ".txt"
-    if config['naming'] == "head-date":
+    elif config['naming'] == "head-date":
         outfilename = config['file_header'] + "-" + date + ".txt"
-    if config['naming'] == "head-hash":
+    elif config['naming'] == "head-hash":
         outfilename = config['file_header'] + "-" + config_hash + ".txt"
-    if config['naming'] == "date-hash":
+    elif config['naming'] == "date-hash":
         outfilename = date + "-" + config_hash + ".txt"
-    if config['naming'] == "hash":
+    elif config['naming'] == "hash":
         outfilename = config_hash + ".txt"
     return outfilename
