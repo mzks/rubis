@@ -1,6 +1,7 @@
 import argparse
 import json
 from glob import glob
+import shutil
 import pkg_resources
 from rubis.core import run
 
