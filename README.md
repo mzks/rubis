@@ -28,6 +28,16 @@ Before run, enable I2C on Raspberry Pi. (`sudo raspi-config`)
 Then, type `pip install rubis`
 The `rubis` binary will be provided at `~/.local/bin/rubis`
 
+If you want database store, do like that additionaly
+```
+sudo apt install mariadb-server
+sudo mysql -u root
+MariaDB [(none)]> UPDATE mysql.user SET password=password('newpassword') WHERE User = 'root';
+MariaDB [mysql]> UPDATE mysql.user SET plugin='' WHERE User='root';
+MariaDB [mysql]> exit
+sudo systemctl restart mysql
+```
+
 
 ### Usage
 When you execute `rubis` without option, default configurations will be used.
@@ -69,9 +79,15 @@ The sources should be set like,
 The `name` is used for csv header. For the `type`, `"volt"`, `"raw"`, `"millivolt"`, and `"linear"` are available.
 `"linear"` returns the value `"a" * (volt) + "b"`. The "a" and "b" should be written in the config file, for each sources.
 
-If you set `"db"` for `output`, the following settings are required.
+If you set `"db"` or `"both"` for `output`, the following settings are required.
 ```
-"db":{
-
-     }
+        "db":{
+            "login":{
+                "host": "127.0.0.1",
+                "port": 3306,
+                "user": "root",
+                "passwd": "newpassword",
+                "autocommit": true},
+            "name": "rubis"
+            }
 ```

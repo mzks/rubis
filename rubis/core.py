@@ -48,11 +48,8 @@ def run(config):
         ocsv, odb = False, True
     if config['output'] == 'both':
         ocsv, odb = True, True
-    print('ODB')
-    print(odb)
     if odb:
         import pymysql.cursors
-        #conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='newpassword', autocommit=True)
         conn = pymysql.connect(**config['db']['login'])
         cursor = conn.cursor()
         cursor.execute("CREATE DATABASE IF NOT EXISTS " + config['db']['name'])
@@ -111,12 +108,19 @@ def run(config):
                     else:
                         f.write(', ')
             if odb:
-                db_data[int(ch_st)] = "{:>5.7f}".format(volt)
+                if s['type'] == 'raw':
+                    db_data[int(ch_st)] = "{:>5}".format(value)
+                elif (s['type'] == 'volt') or (s['type'] == 'V'):
+                    db_data[int(ch_st)] = "{:>5.7f}".format(volt)
+                elif s['type'] == 'millivolt' or (s['type'] == 'mV'):
+                    db_data[int(ch_st)] = "{:>5.4f}".format(volt*1.e3)
+                elif s['type'] == 'linear':
+                    db_data[int(ch_st)] = "{:>5.4f}".format(volt*s['a']+s['b'])
+
 
         if ocsv:
             with open(outfilename, mode='a') as f:
                 f.write('\n')
-
         if odb:
             cursor.execute(sql, tuple(db_data))
 

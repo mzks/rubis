@@ -5,7 +5,7 @@
         "time_interval_sec": 10,
         "time_format" : "datetime",
         "available_boards": [1,2,3,4],
-        "output": "both",
+        "output": "csv",
         "boards":{
             "1":{
                 "gain": 1
