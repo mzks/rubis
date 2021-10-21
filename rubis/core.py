@@ -62,8 +62,10 @@ def run(config):
             for ch, typ in zip(chs, types):
                 if typ == 'raw':
                     f.write(','+"{:>5}".format(ch.value))
-                if typ == 'volt':
+                elif typ == 'volt':
                     f.write(','+"{:>5.3f}".format(ch.voltage))
+                else:
+                    f.write(', ')
             f.write('\n')
 
         time.sleep(config['time_interval_sec'])
