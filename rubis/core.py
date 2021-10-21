@@ -40,7 +40,7 @@ def run(config):
             names.append(config['sources'][ch_id]['name'])
             types.append(config['sources'][ch_id]['type'])
 
-    print('Data taking...')
+    print('Data taking on the hash '+config_hash)
 
     while True:
         now = datetime.datetime.now()
