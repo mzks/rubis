@@ -27,7 +27,7 @@ def run(config):
     adss = [ADS.ADS1115(i2c, address=board_address[str(board_id)]) for board_id in config['available_boards']]
     chs = []
     for ads, board_id in zip(adss, config['available_boards']):
-        ads.gain = config['board'][str(board_id)]['gain']
+        ads.gain = config['boards'][str(board_id)]['gain']
         chs.append(AnalogIn(ads, ADS.P0))
         chs.append(AnalogIn(ads, ADS.P1))
         chs.append(AnalogIn(ads, ADS.P2))
