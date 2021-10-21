@@ -48,10 +48,13 @@ def run(config):
         ocsv, odb = False, True
     if config['output'] == 'both':
         ocsv, odb = True, True
+    print('ODB')
+    print(odb)
     if odb:
         import pymysql.cursors
         #conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='newpassword', autocommit=True)
         conn = pymysql.connect(**config['db']['login'])
+        cursor = conn.cursor()
         cursor.execute("CREATE DATABASE IF NOT EXISTS " + config['db']['name'])
         cursor.execute("USE " + config['db']['name'])
         cursor.execute('''

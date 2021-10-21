@@ -108,8 +108,7 @@
                 "port": 3306,
                 "user": "root",
                 "passwd": "newpassword",
-                "autocommit": true}
-            },
+                "autocommit": true},
             "name": "rubis"
-        }
+            }
 }
