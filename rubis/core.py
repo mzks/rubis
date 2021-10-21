@@ -68,8 +68,10 @@ def run(config):
             for ch, typ in zip(chs, types):
                 if typ == 'raw':
                     f.write(','+"{:>5}".format(ch.value))
-                elif typ == 'volt':
-                    f.write(', '+"{:>5.3f}".format(ch.voltage))
+                elif (typ == 'volt') or (typ == 'V'):
+                    f.write(', '+"{:>5.7f}".format(ch.voltage))
+                elif typ == 'millivolt' or (typ == 'mV'):
+                    f.write(', '+"{:>5.4f}".format(ch.voltage*1.e3))
                 else:
                     f.write(', ')
             f.write('\n')

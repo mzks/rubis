@@ -57,5 +57,5 @@ The sources should be set like,
     "type": "raw"
     },
 ```
-The `name` is used for csv header. For the `type`, `"raw"` and `"volt"` are available.
+The `name` is used for csv header. For the `type`, `"raw"`, `"millivolt"`, and `"volt"` are available.
 
