@@ -63,7 +63,7 @@ def run(config):
                 if typ == 'raw':
                     f.write(','+"{:>5}".format(ch.value))
                 elif typ == 'volt':
-                    f.write(','+"{:>5.3f}".format(ch.voltage))
+                    f.write(', '+"{:>5.3f}".format(ch.voltage))
                 else:
                     f.write(', ')
             f.write('\n')
