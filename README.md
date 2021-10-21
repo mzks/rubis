@@ -35,3 +35,26 @@ You can use your custom configuration file with `-f` option.
 Some options can be overwrited with options.
 
 `rubis -g` generates template config file.
+Edit them, then run `rubis -c custom_config.json`.
+
+
+### Config option
+| Configure name    | Description                      | Option                                                          | Overwrite option |
+| ----------------- | -------------------------------- | --------------------------------------------------------------- | ---------------- |
+| `path`             | Path to store the data           | Default: "./"                                                   | -p               |
+| `file_header`       | File header of generated file    | Default: "sc"                                                   | -h               |
+| `naming`            | Naming style of file             | 'head-date-hash', 'head-hash', 'date-hash', 'hash', 'head-date' | -n               |
+| `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
+| `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
+| `sources`           | Setting for each channels        |                                                                 |                  |
+
+The sources should be set like,
+```
+"1":{
+    "name": "ch1",
+    "description": "channel 1",
+    "type": "raw"
+    },
+```
+The `name` is used for csv header. For the `type`, `"raw"` and `"volt"` are available.
+
