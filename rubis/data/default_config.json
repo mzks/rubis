@@ -3,88 +3,88 @@
         "file_header": "sc",
         "naming": "head-date-hash",
         "time_interval_sec": 10,
-        "time_format" : "timestamp",
+        "time_format" : "datetime",
         "available_boards": [1,2,3,4],
         "sources":{
             "1":{
                 "name": "ch1",
                 "description": "channel 1",
-                "type": "raw"
+                "type": "volt"
             },
             "2":{
                 "name": "ch2",
                 "description": "channel 2",
-                "type": "raw"
+                "type": "volt"
             },
             "3":{
                 "name": "ch3",
                 "description": "channel 3",
-                "type": "raw"
+                "type": "volt"
             },
             "4":{
                 "name": "ch4",
                 "description": "channel 4",
-                "type": "raw"
+                "type": "volt"
             },
             "5":{
                 "name": "ch5",
                 "description": "channel 5",
-                "type": "raw"
+                "type": "volt"
             },
             "6":{
                 "name": "ch6",
                 "description": "channel 6",
-                "type": "raw"
+                "type": "volt"
             },
             "7":{
                 "name": "ch7",
                 "description": "channel 7",
-                "type": "raw"
+                "type": "volt"
             },
             "8":{
                 "name": "ch8",
                 "description": "channel 8",
-                "type": "raw"
+                "type": "volt"
             },
             "9":{
                 "name": "ch9",
                 "description": "channel 9",
-                "type": "raw"
+                "type": "volt"
             },
             "10":{
                 "name": "ch10",
                 "description": "channel 10",
-                "type": "raw"
+                "type": "volt"
             },
             "11":{
                 "name": "ch11",
                 "description": "channel 11",
-                "type": "raw"
+                "type": "volt"
             },
             "12":{
                 "name": "ch12",
                 "description": "channel 12",
-                "type": "raw"
+                "type": "volt"
             },
             "13":{
                 "name": "ch13",
                 "description": "channel 13",
-                "type": "raw"
+                "type": "volt"
             },
             "14":{
                 "name": "ch14",
                 "description": "channel 14",
-                "type": "raw"
+                "type": "volt"
             },
             "15":{
                 "name": "ch15",
                 "description": "channel 15",
-                "type": "raw"
+                "type": "volt"
             },
             "16":{
                 "name": "ch16",
                 "description": "channel 16",
-                "type": "raw"
+                "type": "volt"
             }
         }
 }
