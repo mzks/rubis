@@ -34,7 +34,10 @@ def main():
 
     with open(config_filename) as f:
         config = json.load(f)
-
+    if args.path != 'default':
+        config['path'] = args.path
+    if config['path'][-1] != '/':
+        config['path'] = config['path'] + '/'
     if args.file_header != 'default':
         config['file_header'] = args.file_header
     if args.naming != 'default':
