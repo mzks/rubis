@@ -17,8 +17,10 @@ def main():
                         help='File output path')
     parser.add_argument('-f', '--file_header', default='default')
     parser.add_argument('-n', '--naming', default='default')
+    parser.add_argument('-o', '--output', default='default')
     parser.add_argument('-t', '--time_interval_sec', default=0,
                         help='Time interval to collect data', type=int)
+
 
     args = parser.parse_args()
 
@@ -42,6 +44,8 @@ def main():
         config['file_header'] = args.file_header
     if args.naming != 'default':
         config['naming'] = args.naming
+    if args.output != 'default':
+        config['output'] = args.output
     if args.time_interval_sec > 0:
         config['time_interval_sec'] = args.time_interval_sec
 
