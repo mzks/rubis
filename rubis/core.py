@@ -75,6 +75,8 @@ def get_outfilename(config, config_hash, date):
 
     if config['naming'] == "head-date-hash":
         outfilename = config['file_header'] + "-" + date + "-" + config_hash + ".txt"
+    if config['naming'] == "head-hash":
+        outfilename = config['file_header'] + "-" + config_hash + ".txt"
     if config['naming'] == "date-hash":
         outfilename = date + "-" + config_hash + ".txt"
     if config['naming'] == "hash":
