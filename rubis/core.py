@@ -55,13 +55,15 @@ def run(config):
         cursor.execute("CREATE DATABASE IF NOT EXISTS " + config['db']['name'])
         cursor.execute("USE " + config['db']['name'])
         cursor.execute('''
-                        CREATE TABLE IF NOT EXISTS data (id INT AUTO_INCREMENT, time DATETIME, 
+                        CREATE TABLE IF NOT EXISTS data (id INT AUTO_INCREMENT, 
+                        time DATETIME not null default CURRENT_TIMESTAMP, 
                         ch1 FLOAT, ch2 FLOAT, ch3 FLOAT, ch4 FLOAT, ch5 FLOAT, ch6 FLOAT,
                         ch7 FLOAT, ch8 FLOAT, ch9 FLOAT, ch10 FLOAT, ch11 FLOAT, ch12 FLOAT,
-                        ch13 FLOAT, ch14 FLOAT, ch15 FLOAT, ch16 FLOAT, hash VARCHAR(6), PRIMARY KEY (id))
+                        ch13 FLOAT, ch14 FLOAT, ch15 FLOAT, ch16 FLOAT, hash VARCHAR(6), log_time DATETIME,
+                        PRIMARY KEY (id))
                         ''')
         sql = ('''
-                INSERT INTO data (time, ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10,
+                INSERT INTO data (log_time, ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10,
                 ch11, ch12, ch13, ch14, ch15, ch16, hash)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                ''')
