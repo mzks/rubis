@@ -56,7 +56,7 @@ def run(config):
         cursor.execute("USE " + config['db']['name'])
         cursor.execute('''
                         CREATE TABLE IF NOT EXISTS data (id INT AUTO_INCREMENT, 
-                        time DATETIME not null default CURRENT_TIMESTAMP, 
+                        time TIMESTAMP not null default CURRENT_TIMESTAMP, 
                         ch1 FLOAT, ch2 FLOAT, ch3 FLOAT, ch4 FLOAT, ch5 FLOAT, ch6 FLOAT,
                         ch7 FLOAT, ch8 FLOAT, ch9 FLOAT, ch10 FLOAT, ch11 FLOAT, ch12 FLOAT,
                         ch13 FLOAT, ch14 FLOAT, ch15 FLOAT, ch16 FLOAT, hash VARCHAR(6), log_time DATETIME,
