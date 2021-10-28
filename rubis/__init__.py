@@ -1,4 +1,4 @@
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 from .cli import main
 from .hash import deterministic_hash

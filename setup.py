@@ -22,7 +22,7 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    install_requires=['numpy', 'PyMySQL', 'adafruit-circuitpython-ads1x15'],
+    install_requires=['PyMySQL', 'adafruit-circuitpython-ads1x15'],
     license="MIT",
     include_package_data=True,
     classifiers=[
