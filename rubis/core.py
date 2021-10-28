@@ -131,13 +131,13 @@ def run(config):
 def get_outfilename(config, config_hash, date):
 
     if config['naming'] == "head-date-hash":
-        outfilename = config['file_header'] + "-" + date + "-" + config_hash + ".txt"
+        outfilename = config['file_header'] + "-" + date + "-" + config_hash + ".csv"
     elif config['naming'] == "head-date":
-        outfilename = config['file_header'] + "-" + date + ".txt"
+        outfilename = config['file_header'] + "-" + date + ".csv"
     elif config['naming'] == "head-hash":
-        outfilename = config['file_header'] + "-" + config_hash + ".txt"
+        outfilename = config['file_header'] + "-" + config_hash + ".csv"
     elif config['naming'] == "date-hash":
-        outfilename = date + "-" + config_hash + ".txt"
+        outfilename = date + "-" + config_hash + ".csv"
     elif config['naming'] == "hash":
-        outfilename = config_hash + ".txt"
+        outfilename = config_hash + ".csv"
     return outfilename
