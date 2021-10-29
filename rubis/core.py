@@ -1,10 +1,7 @@
 import os, sys
 import time
 import datetime
-
-import pandas as pd
 import json
-
 import board
 import busio
 import adafruit_ads1x15.ads1115 as ADS
