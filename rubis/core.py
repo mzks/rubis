@@ -82,7 +82,7 @@ def run(config):
             # File existance check
             if not os.path.isfile(outfilename):
                 with open(outfilename, mode='a') as f:
-                    f.write('time')
+                    f.write('#time')
                     for source in sources:
                         f.write(',' + source['name'])
                     f.write('\n')
@@ -141,5 +141,9 @@ def get_outfilename(config, config_hash, date):
     elif config['naming'] == "hash":
         outfilename = config_hash + ".csv"
     elif config['naming'] == "date":
-        outfilename = date + ".csv"
+        outfilename = date + ""
+    elif config['naming'] == "date-id":
+        outfilename = date + "_" + config['rubis_id']
+    outfilename=config['path']+outfilename    
+    print("Data taking to",outfilename )
     return outfilename
