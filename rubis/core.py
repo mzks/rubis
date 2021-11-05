@@ -140,4 +140,6 @@ def get_outfilename(config, config_hash, date):
         outfilename = date + "-" + config_hash + ".csv"
     elif config['naming'] == "hash":
         outfilename = config_hash + ".csv"
+    elif config['naming'] == "date":
+        outfilename = date + ".csv"
     return outfilename
