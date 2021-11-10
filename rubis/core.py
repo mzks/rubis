@@ -66,7 +66,17 @@ def run(config):
                 ch11, ch12, ch13, ch14, ch15, ch16, hash)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                ''')
+        
+    if config['delimiter']:
+        delimiter=config['delimiter']
+    else:
+        delimiter=","
 
+    if config['commentout_char']:
+        commentout_char=config['commentout_char']
+    else:
+        dlimiter=""
+        
     while True:
         now = datetime.datetime.now()
         date = now.strftime("%Y%m%d")
@@ -82,9 +92,10 @@ def run(config):
             # File existance check
             if not os.path.isfile(outfilename):
                 with open(outfilename, mode='a') as f:
-                    f.write('#time')
+                    f.write(commentout_char+'time')
                     for source in sources:
-                        f.write(',' + source['name'])
+#                        f.write(',' + source['name'])
+                        f.write(delimiter + source['name'])
                     f.write('\n')
             with open(outfilename, mode='a') as f:
                 f.write(time_str)
@@ -99,15 +110,20 @@ def run(config):
             if ocsv:
                 with open(outfilename, mode='a') as f:
                     if s['type'] == 'raw':
-                        f.write(','+"{:>5}".format(value))
+                      #  f.write(','+"{:>5}".format(value))
+                        f.write(delimiter+"{:>5}".format(value))
                     elif (s['type'] == 'volt') or (s['type'] == 'V'):
-                        f.write(', '+"{:>5.7f}".format(volt))
+   #                     f.write(', '+"{:>5.7f}".format(volt))
+                        f.write(delimiter+"{:>5.7f}".format(volt))
                     elif s['type'] == 'millivolt' or (s['type'] == 'mV'):
-                        f.write(', '+"{:>5.4f}".format(volt*1.e3))
+  #                      f.write(', '+"{:>5.4f}".format(volt*1.e3))
+                        f.write(delimiter+"{:>5.4f}".format(volt*1.e3))
                     elif s['type'] == 'linear':
-                        f.write(', '+"{:>5.4f}".format(volt*s['a']+s['b']))
+ #                       f.write(', '+"{:>5.4f}".format(volt*s['a']+s['b']))
+                        f.write(delimiter+"{:>5.4f}".format(volt*s['a']+s['b']))
                     else:
-                        f.write(', ')
+#                        f.write(', ')
+                        f.write(delimiter)
             if odb:
                 if s['type'] == 'raw':
                     db_data[int(ch_st)] = "{:>5}".format(value)
@@ -142,7 +158,7 @@ def get_outfilename(config, config_hash, date):
         outfilename = config_hash + ".csv"
     elif config['naming'] == "date":
         outfilename = date + ""
-    elif config['naming'] == "date-id":
+    elif config['naming'] == "date-id": #CYGNUS_custom
         outfilename = date + "_" + config['rubis_id']
     outfilename=config['path']+outfilename    
     print("Data taking to",outfilename )
