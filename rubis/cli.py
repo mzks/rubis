@@ -66,7 +66,7 @@ def main():
         config['output'] = args.output
     if args.rubis_id != 'default':
         config['rubis_id'] = args.rubis_id
-    if args.delimiter != 'space':
+    if args.delimiter == 'space':
         config['delimiter'] = ' '
     elif args.delimiter != 'default':
         config['delimiter'] = args.delimiter
