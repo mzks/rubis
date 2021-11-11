@@ -49,6 +49,7 @@ sudo apt install mariadb-server
 sudo mysql -u root
 MariaDB [(none)]> UPDATE mysql.user SET password=password('newpassword') WHERE User = 'root';
 MariaDB [mysql]> UPDATE mysql.user SET plugin='' WHERE User='root';
+MariaDB [mysql]> grant all privileges on *.* to 'root'@'localhost' identified by 'newpassword' with grant option;
 MariaDB [mysql]> exit
 sudo systemctl restart mysql
 ```
