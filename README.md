@@ -38,12 +38,10 @@ Then, you can find the i2c devices like this.
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 ```
-
 If you need, run `sudo apt install libatlas-base-dev` to use `numpy` (This tool doesn't depend on `numpy`).
 
 Then, type `pip3 install rubis`
 The `rubis` binary will be provided at `~/.local/bin/rubis`
-
 
 If you want database store, do like that additionaly
 ```
@@ -53,6 +51,15 @@ MariaDB [(none)]> UPDATE mysql.user SET password=password('newpassword') WHERE U
 MariaDB [mysql]> UPDATE mysql.user SET plugin='' WHERE User='root';
 MariaDB [mysql]> exit
 sudo systemctl restart mysql
+```
+
+If you need static IP access, please edit `/etc/dhcpcd.conf` like this.
+```
+# Example static IP configuration:
+interface eth0
+static ip_address=xx.xx.xx.xx/23 # your IP
+static routers=xx.xx.xx.xx # your gateway
+static domain_name_servers=xx.xx.xx.xx xx.xx.xx.xx # your DNS
 ```
 
 
@@ -144,3 +151,6 @@ If you set `"db"` or `"both"` for `output`, the following settings are required.
     "name": "rubis"
     }
 ```
+
+## For developers
+Clone this repository on your machine, then run `make.sh`.
