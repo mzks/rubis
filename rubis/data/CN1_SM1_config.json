@@ -1,14 +1,14 @@
 {
-        "path": "./",
-        "rubis_id": "1",
+        "path": "/nadb/nadb41/status/rubis/",
         "file_header": "sc",
-        "naming": "head-date-hash.csv",
+        "rubis_id": "1",
+        "naming": "date-id",
         "time_interval_sec": 10,
-        "time_format" : "datetime",
+        "time_format" : "%Y/%m/%d/%H:%M:%S",
         "available_boards": [1,2,3,4],
         "output": "csv",
-        "delimiter": ",",
-        "commentout_string": "",
+        "delimiter": " ",
+        "commentout_string": "# ",
         "boards":{
             "1":{
                 "gain": 1

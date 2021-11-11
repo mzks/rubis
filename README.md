@@ -38,12 +38,10 @@ Then, you can find the i2c devices like this.
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 ```
-
 If you need, run `sudo apt install libatlas-base-dev` to use `numpy` (This tool doesn't depend on `numpy`).
 
 Then, type `pip3 install rubis`
 The `rubis` binary will be provided at `~/.local/bin/rubis`
-
 
 If you want database store, do like that additionaly
 ```
@@ -53,6 +51,15 @@ MariaDB [(none)]> UPDATE mysql.user SET password=password('newpassword') WHERE U
 MariaDB [mysql]> UPDATE mysql.user SET plugin='' WHERE User='root';
 MariaDB [mysql]> exit
 sudo systemctl restart mysql
+```
+
+If you need static IP access, please edit `/etc/dhcpcd.conf` like this.
+```
+# Example static IP configuration:
+interface eth0
+static ip_address=xx.xx.xx.xx/23 # your IP
+static routers=xx.xx.xx.xx # your gateway
+static domain_name_servers=xx.xx.xx.xx xx.xx.xx.xx # your DNS
 ```
 
 
@@ -102,10 +109,12 @@ df = pd.concat(df)
 | ------------------- | -------------------------------- | --------------------------------------------------------------- | ---------------- |
 | `path`              | Path to store the data           | Default: "./"                                                   | -p               |
 | `file_header`       | File header of generated file    | Default: "sc"                                                   | -h               |
-| `naming`            | Naming style of file             | 'head-date-hash', 'head-hash', 'date-hash', 'hash', 'head-date' | -n               |
+| `naming`            | Naming style of file             | `'head-date-hash-id'`, `'date_hash.csv'`, etc.                  | -n               |
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
 | `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
 | `output`            | Output format                    | `"csv"`, `"db"`, or `"both"`                                    | -o               |
+| `delimiter`         | Delimiter for csv output         | `","`, `"space"`, etc.                                          | -d               |
+| `commentout_string` | Strings to be added on the csv file header | default: ""                                           |                  |
 | `time_format`       | Time column format               | "timestamp", "datetime" (default), or strftime format (for example, "%H:%M:%S") |  |
 | `boards`            | Setting for each ADS1115 board   | `"gain"` option is available                                    |                  |
 | `sources`           | Setting for each channels        |                                                                 |                  |
@@ -142,3 +151,6 @@ If you set `"db"` or `"both"` for `output`, the following settings are required.
     "name": "rubis"
     }
 ```
+
+## For developers
+Clone this repository on your machine, then run `make.sh`.
