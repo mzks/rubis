@@ -70,7 +70,7 @@ def main():
         config['delimiter'] = ' '
     elif args.delimiter != 'default':
         config['delimiter'] = args.delimiter
-    if config['delimiter'] = 'space':
+    if config['delimiter'] == 'space':
         config['delimiter'] = ' '
     if args.time_interval_sec > 0:
         config['time_interval_sec'] = args.time_interval_sec
