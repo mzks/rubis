@@ -25,9 +25,18 @@ def main():
     parser.add_argument('-o', '--output', default='default')
     parser.add_argument('-t', '--time_interval_sec', default=0,
                         help='Time interval to collect data', type=int)
-
+    parser.add_argument('-v', '--version', action='store_true')
 
     args = parser.parse_args()
+
+    if args.version:
+        PACKAGE_NAME = 'rubis'
+        with open(os.path.join(PACKAGE_NAME, '__init__.py')) as f:
+            match = re.search(r'__version__\s+=\s+(.*)', f.read())
+        version = str(ast.literal_eval(match.group(1)))
+        print('rubis version : ' + version)
+        return
+
     if args.generate_config:
         config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
         shutil.copyfile(config_filename, './custom_config.json')
