@@ -38,7 +38,7 @@ Then, you can find the i2c devices like this.
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 ```
-If you need, run `sudo apt install libatlas-base-dev` to use `numpy` (This tool doesn't depend on `numpy`).
+If you will use an old raspberry pi, run `sudo apt install libatlas-base-dev` to use `numpy` (This tool doesn't depend on `numpy`).
 
 Then, type `pip3 install rubis`
 The `rubis` binary will be provided at `~/.local/bin/rubis`
@@ -60,6 +60,8 @@ GRANT ALL ON *.* TO 'rubis'@'10.37.%';
 FLUSH PRIVILEGES;
 ```
 And comment out the `bind-address` line in `/etc/mysql/mariadb.conf.d/50-server.cnf`.
+In addition, add `default_time_zone='+00:00'` at the bottom of the file.
+Then run `sudo systemctl restart mysql`.
 
 If you need static IP access, please edit `/etc/dhcpcd.conf` like this.
 ```
@@ -162,3 +164,4 @@ If you set `"db"` or `"both"` for `output`, the following settings are required.
 
 ## For developers
 Clone this repository on your machine, then run `make.sh`.
+If you need something, please feel free to send a PR or ask me on issue.
