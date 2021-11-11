@@ -11,6 +11,7 @@ This repository provides board design and control software.
  - Standalone
  - Inexpensive
  - Multi channels (16 ch) and additional connectors (4 ch)
+ - Including software (This!)
 
 ## Hardware components
  - rubis board - less than 5 dollars at elecrow 
@@ -42,44 +43,21 @@ If you will use an old raspberry pi, run `sudo apt install libatlas-base-dev` to
 
 Then, type `pip3 install rubis`
 The `rubis` binary will be provided at `~/.local/bin/rubis`
-
-If you want database store, do like that additionaly
-```
-sudo apt install mariadb-server
-sudo mysql -u root
-MariaDB [(none)]> UPDATE mysql.user SET password=password('newpassword') WHERE User = 'root';
-MariaDB [mysql]> UPDATE mysql.user SET plugin='' WHERE User='root';
-MariaDB [mysql]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' identified by 'newpassword' with grant option;
-MariaDB [mysql]> exit
-sudo systemctl restart mysql
-```
-You need an external access, please make a user.
-```
-CREATE USER 'rubis'@'10.37.%' IDENTIFIED BY 'password';
-GRANT ALL ON *.* TO 'rubis'@'10.37.%';
-FLUSH PRIVILEGES;
-```
-And comment out the `bind-address` line in `/etc/mysql/mariadb.conf.d/50-server.cnf`.
-In addition, add `default_time_zone='+00:00'` at the bottom of the file.
-Then run `sudo systemctl restart mysql`.
-
-If you need static IP access, please edit `/etc/dhcpcd.conf` like this.
-```
-# Example static IP configuration:
-interface eth0
-static ip_address=xx.xx.xx.xx/23 # your IP
-static routers=xx.xx.xx.xx # your gateway
-static domain_name_servers=xx.xx.xx.xx xx.xx.xx.xx # your DNS
-```
+You want mysql store, please see `Database setting` below.
 
 
 ### Usage
 When you execute `rubis` without option, logging immidiately starts with default configurations.
 You can use your custom configuration file with `-c` option.
-Some options can be overwrited with options.
 
 `rubis -g` generates template config file.
 Edit them, then run `rubis -c custom_config.json`.
+At the **strong** request of the author's supervisor, the following commands are available to people in CYGNUS (dark matter search experiment) without creating or editing a new configuration file.
+```
+rubis -c CN1_SM1_config.json
+```
+
+Some options can be overwrited with options.
 
 `rubis -h` provides option descriptions.
 
@@ -123,7 +101,7 @@ df = pd.concat(df)
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
 | `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
 | `output`            | Output format                    | `"csv"`, `"db"`, or `"both"`                                    | -o               |
-| `delimiter`         | Delimiter for csv output         | `","`, `"space"`, etc.                                          | -d               |
+| `delimiter`         | Delimiter for csv output         | `","`, `" "`, `"space"`, etc.                                          | -d               |
 | `commentout_string` | Strings to be added on the csv file header | default: ""                                           |                  |
 | `time_format`       | Time column format               | "timestamp", "datetime" (default), or strftime format (for example, "%H:%M:%S") |  |
 | `boards`            | Setting for each ADS1115 board   | `"gain"` option is available                                    |                  |
@@ -149,7 +127,38 @@ The sources should be set like,
 The `name` is used for csv header. For the `type`, `"volt"`, `"raw"`, `"millivolt"`, and `"linear"` are available.
 `"linear"` returns the value `"a" * (volt) + "b"`. The "a" and "b" should be written in the config file, for each sources.
 
-If you set `"db"` or `"both"` for `output`, the following settings are required.
+
+## Database setting
+If you want database store, do like that additionaly
+```
+sudo apt install mariadb-server
+sudo mysql -u root
+MariaDB [(none)]> UPDATE mysql.user SET password=password('newpassword') WHERE User = 'root';
+MariaDB [mysql]> UPDATE mysql.user SET plugin='' WHERE User='root';
+MariaDB [mysql]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' identified by 'newpassword' with grant option;
+MariaDB [mysql]> exit
+sudo systemctl restart mysql
+```
+You need an external access, please make a user.
+```
+CREATE USER 'rubis'@'10.37.%' IDENTIFIED BY 'password';
+GRANT ALL ON *.* TO 'rubis'@'10.37.%';
+FLUSH PRIVILEGES;
+```
+And comment out the `bind-address` line in `/etc/mysql/mariadb.conf.d/50-server.cnf`.
+In addition, add `default_time_zone='+00:00'` at the bottom of the file.
+Then run `sudo systemctl restart mysql`.
+
+If you need static IP access, please edit `/etc/dhcpcd.conf` like this.
+```
+# Example static IP configuration:
+interface eth0
+static ip_address=xx.xx.xx.xx/23 # your IP
+static routers=xx.xx.xx.xx # your gateway
+static domain_name_servers=xx.xx.xx.xx xx.xx.xx.xx # your DNS
+```
+
+When you set `"db"` or `"both"` for `output` in config file, the following settings are required.
 ```
 "db":{
     "login":{
@@ -161,6 +170,7 @@ If you set `"db"` or `"both"` for `output`, the following settings are required.
     "name": "rubis"
     }
 ```
+
 
 ## For developers
 Clone this repository on your machine, then run `make.sh`.
