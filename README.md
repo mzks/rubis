@@ -6,6 +6,10 @@ This repository provides board design and control software.
 <img src="https://user-images.githubusercontent.com/12980386/138100032-73b48425-1298-4935-a816-715054cd197c.png" width="400">
 <img src="https://user-images.githubusercontent.com/12980386/138100048-b96825b0-636b-4689-a27d-31d813c87a6c.png" width="400">
 
+# Demo
+<img width="1820" alt="demo" src="https://user-images.githubusercontent.com/12980386/141337443-35ac1b33-6fc7-456a-b7bd-edcf14d8db49.png">
+
+
 ## Feature
 
  - Standalone
@@ -57,7 +61,7 @@ At the **strong** request of the author's supervisor, the following commands are
 rubis -c CN1_SM1_config.json
 ```
 
-Some options can be overwrited with options.
+Some configurations can be overwrited with command line options.
 
 `rubis -h` provides option descriptions.
 
