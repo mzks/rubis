@@ -102,10 +102,12 @@ df = pd.concat(df)
 | ------------------- | -------------------------------- | --------------------------------------------------------------- | ---------------- |
 | `path`              | Path to store the data           | Default: "./"                                                   | -p               |
 | `file_header`       | File header of generated file    | Default: "sc"                                                   | -h               |
-| `naming`            | Naming style of file             | 'head-date-hash', 'head-hash', 'date-hash', 'hash', 'head-date' | -n               |
+| `naming`            | Naming style of file             | `'head-date-hash-id'`, `'date_hash.csv'`, etc.                  | -n               |
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
 | `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
 | `output`            | Output format                    | `"csv"`, `"db"`, or `"both"`                                    | -o               |
+| `delimiter`         | Delimiter for csv output         | `","`, `"space"`, etc.                                          | -d               |
+| `commentout_string` | Strings to be added on the csv file header | default: ""                                           |                  |
 | `time_format`       | Time column format               | "timestamp", "datetime" (default), or strftime format (for example, "%H:%M:%S") |  |
 | `boards`            | Setting for each ADS1115 board   | `"gain"` option is available                                    |                  |
 | `sources`           | Setting for each channels        |                                                                 |                  |
