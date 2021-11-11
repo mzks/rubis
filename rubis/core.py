@@ -58,25 +58,19 @@ def run(config):
                         time TIMESTAMP not null default CURRENT_TIMESTAMP, 
                         ch1 FLOAT, ch2 FLOAT, ch3 FLOAT, ch4 FLOAT, ch5 FLOAT, ch6 FLOAT,
                         ch7 FLOAT, ch8 FLOAT, ch9 FLOAT, ch10 FLOAT, ch11 FLOAT, ch12 FLOAT,
-                        ch13 FLOAT, ch14 FLOAT, ch15 FLOAT, ch16 FLOAT, hash VARCHAR(6), log_time DATETIME,
+                        ch13 FLOAT, ch14 FLOAT, ch15 FLOAT, ch16 FLOAT, hash VARCHAR(6), 
+                        rubis_id VARCHAR(10), log_time DATETIME,
                         PRIMARY KEY (id))
                         ''')
         sql = ('''
                 INSERT INTO data (log_time, ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10,
-                ch11, ch12, ch13, ch14, ch15, ch16, hash)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ch11, ch12, ch13, ch14, ch15, ch16, hash, rubis_id)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                ''')
         
-    if config['delimiter']:
-        delimiter=config['delimiter']
-    else:
-        delimiter=","
+    delim = config['delimiter']
+    commentout_string = config['commentout_string']
 
-    if config['commentout_char']:
-        commentout_char=config['commentout_char']
-    else:
-        dlimiter=""
-        
     while True:
         now = datetime.datetime.now()
         date = now.strftime("%Y%m%d")
@@ -92,17 +86,16 @@ def run(config):
             # File existance check
             if not os.path.isfile(outfilename):
                 with open(outfilename, mode='a') as f:
-                    f.write(commentout_char+'time')
+                    f.write(commentout_string+'time')
                     for source in sources:
-#                        f.write(',' + source['name'])
-                        f.write(delimiter + source['name'])
+                        f.write(delim + source['name'])
                     f.write('\n')
             with open(outfilename, mode='a') as f:
                 f.write(time_str)
 
         if odb:
             db_data = [now.strftime("%Y-%m-%d %H:%M:%S"), 
-                        "0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",config_hash]
+                        "0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",config_hash,config['rubis_id']]
 
         for ch, s, ch_st in zip(chs, sources, ch_str):
             value = ch.value
@@ -110,20 +103,15 @@ def run(config):
             if ocsv:
                 with open(outfilename, mode='a') as f:
                     if s['type'] == 'raw':
-                      #  f.write(','+"{:>5}".format(value))
-                        f.write(delimiter+"{:>5}".format(value))
+                        f.write(delim+"{:>5}".format(value))
                     elif (s['type'] == 'volt') or (s['type'] == 'V'):
-   #                     f.write(', '+"{:>5.7f}".format(volt))
-                        f.write(delimiter+"{:>5.7f}".format(volt))
+                        f.write(delim+"{:>5.7f}".format(volt))
                     elif s['type'] == 'millivolt' or (s['type'] == 'mV'):
-  #                      f.write(', '+"{:>5.4f}".format(volt*1.e3))
-                        f.write(delimiter+"{:>5.4f}".format(volt*1.e3))
+                        f.write(delim+"{:>5.4f}".format(volt*1.e3))
                     elif s['type'] == 'linear':
- #                       f.write(', '+"{:>5.4f}".format(volt*s['a']+s['b']))
-                        f.write(delimiter+"{:>5.4f}".format(volt*s['a']+s['b']))
+                        f.write(delim+"{:>5.4f}".format(volt*s['a']+s['b']))
                     else:
-#                        f.write(', ')
-                        f.write(delimiter)
+                        f.write(delim)
             if odb:
                 if s['type'] == 'raw':
                     db_data[int(ch_st)] = "{:>5}".format(value)
@@ -146,20 +134,25 @@ def run(config):
 
 def get_outfilename(config, config_hash, date):
 
-    if config['naming'] == "head-date-hash":
-        outfilename = config['file_header'] + "-" + date + "-" + config_hash + ".csv"
-    elif config['naming'] == "head-date":
-        outfilename = config['file_header'] + "-" + date + ".csv"
-    elif config['naming'] == "head-hash":
-        outfilename = config['file_header'] + "-" + config_hash + ".csv"
-    elif config['naming'] == "date-hash":
-        outfilename = date + "-" + config_hash + ".csv"
-    elif config['naming'] == "hash":
-        outfilename = config_hash + ".csv"
-    elif config['naming'] == "date":
-        outfilename = date + ""
-    elif config['naming'] == "date-id": #CYGNUS_custom
-        outfilename = date + "_" + config['rubis_id']
-    outfilename=config['path']+outfilename    
-    print("Data taking to",outfilename )
+    outfilename = ''
+    len(config['naming'])
+    c = 0
+    while c < len(config['naming']):
+        if config['naming'][c:c+4] == 'head':
+            outfilename += config['file_header']
+            c += 4
+        elif config['naming'][c:c+4] == 'date':
+            outfilename += date
+            c += 4
+        elif config['naming'][c:c+4] == 'hash':
+            outfilename += config_hash
+            c += 4
+        elif config['naming'][c:c+2] == 'id':
+            outfilename += config['rubis_id']
+            c += 2
+        else:
+            outfilename += config['naming'][c]
+            c += 1
+
+    outfilename = config['path'] + outfilename    
     return outfilename

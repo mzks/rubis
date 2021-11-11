@@ -15,11 +15,14 @@ def main():
                         help='Generate config example')
     parser.add_argument('-p', '--path', default='default',
                         help='File output path')
+    parser.add_argument('-i', '--rubis_id', default='default',
+                        help='Rubis ID')
+    parser.add_argument('-d', '--delimiter', default='default',
+                        help='Delimiter for csv output')
     parser.add_argument('-f', '--file_header', default='default')
     parser.add_argument('-n', '--naming', default='default')
     parser.add_argument('-o', '--output', default='default')
     parser.add_argument('-t', '--time_interval_sec', default=0,
-                        help='Time interval to collect data', type=int)
 
 
     args = parser.parse_args()
@@ -32,7 +35,11 @@ def main():
     if args.config == 'default_config':
         config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
     else:
-        config_filename = args.config
+        config_filename = pkg_resources.resource_filename('rubis','data') + '/' + args.config
+        if os.path.exists(config_filename)
+            pass
+        else:
+            config_filename = args.config
 
     with open(config_filename) as f:
         config = json.load(f)
@@ -46,6 +53,12 @@ def main():
         config['naming'] = args.naming
     if args.output != 'default':
         config['output'] = args.output
+    if args.rubis_id != 'default':
+        config['rubis_id'] = args.rubis_id
+    if args.delimiter != 'space':
+        config['delimiter'] = ' '
+    elif args.delimiter != 'default':
+        config['delimiter'] = args.delimiter
     if args.time_interval_sec > 0:
         config['time_interval_sec'] = args.time_interval_sec
 
