@@ -103,6 +103,7 @@ df = pd.concat(df)
 | `path`              | Path to store the data           | Default: "./"                                                   | -p               |
 | `file_header`       | File header of generated file    | Default: "sc"                                                   | -h               |
 | `naming`            | Naming style of file             | `'head-date-hash-id'`, `'date_hash.csv'`, etc.                  | -n               |
+| `rubis_id`          | rubis id (string)                | Used to identify your rubis board                               | -i               |
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
 | `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
 | `output`            | Output format                    | `"csv"`, `"db"`, or `"both"`                                    | -o               |
