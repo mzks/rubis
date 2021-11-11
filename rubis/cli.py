@@ -1,3 +1,4 @@
+import os
 import argparse
 import json
 from glob import glob
@@ -23,10 +24,10 @@ def main():
     parser.add_argument('-n', '--naming', default='default')
     parser.add_argument('-o', '--output', default='default')
     parser.add_argument('-t', '--time_interval_sec', default=0,
+                        help='Time interval to collect data', type=int)
 
 
     args = parser.parse_args()
-
     if args.generate_config:
         config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
         shutil.copyfile(config_filename, './custom_config.json')
@@ -36,10 +37,11 @@ def main():
         config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
     else:
         config_filename = pkg_resources.resource_filename('rubis','data') + '/' + args.config
-        if os.path.exists(config_filename)
+        if os.path.exists(config_filename):
             pass
         else:
             config_filename = args.config
+    print('Use config ' + config_filename)
 
     with open(config_filename) as f:
         config = json.load(f)

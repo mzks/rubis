@@ -8,7 +8,7 @@
         "available_boards": [1,2,3,4],
         "output": "csv",
         "delimiter": " ",
-        "commentout_char": "#",
+        "commentout_string": "# ",
         "boards":{
             "1":{
                 "gain": 1

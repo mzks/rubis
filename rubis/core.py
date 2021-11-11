@@ -16,7 +16,7 @@ from rubis.hash import deterministic_hash
 def run(config):
 
     config_hash = deterministic_hash(config, 6)
-    config_json = open(config_hash+".json", "w")
+    config_json = open(config['path'] + config_hash + ".json", "w")
     json.dump(config, config_json, indent = 4)
     config_json.close()
 
