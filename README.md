@@ -49,10 +49,17 @@ sudo apt install mariadb-server
 sudo mysql -u root
 MariaDB [(none)]> UPDATE mysql.user SET password=password('newpassword') WHERE User = 'root';
 MariaDB [mysql]> UPDATE mysql.user SET plugin='' WHERE User='root';
-MariaDB [mysql]> grant all privileges on *.* to 'root'@'localhost' identified by 'newpassword' with grant option;
+MariaDB [mysql]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' identified by 'newpassword' with grant option;
 MariaDB [mysql]> exit
 sudo systemctl restart mysql
 ```
+You need an external access, please make a user.
+```
+CREATE USER 'rubis'@'10.37.%' IDENTIFIED BY 'password';
+GRANT ALL ON *.* TO 'rubis'@'10.37.%';
+FLUSH PRIVILEGES;
+```
+And comment out the `bind-address` line in `/etc/mysql/mariadb.conf.d/50-server.cnf`.
 
 If you need static IP access, please edit `/etc/dhcpcd.conf` like this.
 ```
