@@ -101,8 +101,8 @@ df = pd.concat(df)
 | Configure name      | Description                      | Option                                                          | Overwrite option |
 | ------------------- | -------------------------------- | --------------------------------------------------------------- | ---------------- |
 | `path`              | Path to store the data           | Default: "./"                                                   | -p               |
-| `file_header`       | File header of generated file    | Default: "sc"                                                   | -h               |
-| `naming`            | Naming style of file             | `'head-date-hash-id'`, `'date_hash.csv'`, etc.                  | -n               |
+| `file_header`       | File header of generated file    | Default: "sc"                                                   | -f               |
+| `naming`            | Naming style of file             | `'date_hash.csv'`, etc. Available keywords : 'head', 'date', 'id', 'hash', 'host' | -n               |
 | `rubis_id`          | rubis id (string)                | Used to identify your rubis board                               | -i               |
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
 | `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |

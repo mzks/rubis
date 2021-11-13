@@ -1,4 +1,5 @@
 import os, sys
+import socket
 import time
 import datetime
 import json
@@ -132,7 +133,6 @@ def run(config):
 def get_outfilename(config, config_hash, date):
 
     outfilename = ''
-    len(config['naming'])
     c = 0
     while c < len(config['naming']):
         if config['naming'][c:c+4] == 'head':
@@ -143,6 +143,9 @@ def get_outfilename(config, config_hash, date):
             c += 4
         elif config['naming'][c:c+4] == 'hash':
             outfilename += config_hash
+            c += 4
+        elif config['naming'][c:c+4] == 'host':
+            outfilename += socket.gethostname()
             c += 4
         elif config['naming'][c:c+2] == 'id':
             outfilename += config['rubis_id']

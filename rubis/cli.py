@@ -28,12 +28,8 @@ def main():
     parser.add_argument('-v', '--version', action='store_true')
 
     args = parser.parse_args()
-
+    version = '0.5.1'
     if args.version:
-        PACKAGE_NAME = 'rubis'
-        with open(os.path.join(PACKAGE_NAME, '__init__.py')) as f:
-            match = re.search(r'__version__\s+=\s+(.*)', f.read())
-        version = str(ast.literal_eval(match.group(1)))
         print('rubis version : ' + version)
         return
 
