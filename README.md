@@ -105,7 +105,7 @@ df = pd.concat(df)
 | `naming`            | Naming style of file             | `'date_hash.csv'`, etc. Available keywords : 'head', 'date', 'id', 'hash', 'host' | -n               |
 | `rubis_id`          | rubis id (string)                | Used to identify your rubis board                               | -i               |
 | `time_interval_sec` | Data taking time interval (sec)  | Default: 10                                                     | -t               |
-| `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              |                  |
+| `available_boards`  | List of available ADS1115 boards | Default: [1,2,3,4]                                              | -a               |
 | `output`            | Output format                    | `"csv"`, `"db"`, or `"both"`                                    | -o               |
 | `delimiter`         | Delimiter for csv output         | `","`, `" "`, `"space"`, etc.                                          | -d               |
 | `commentout_string` | Strings to be added on the csv file header | default: ""                                           |                  |

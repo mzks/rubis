@@ -18,21 +18,17 @@ def read_jsonc(filepath:str):
 def main():
 
     parser = argparse.ArgumentParser(description='Rubis Control tool')
-    parser.add_argument('-c', '--config', default='default_config',
-                        help='Config json filename with path')
-    parser.add_argument('-g', '--generate_config', action='store_true',
-                        help='Generate config example')
-    parser.add_argument('-p', '--path', default='default',
-                        help='File output path')
-    parser.add_argument('-i', '--rubis_id', default='default',
-                        help='Rubis ID')
-    parser.add_argument('-d', '--delimiter', default='default',
-                        help='Delimiter for csv output')
-    parser.add_argument('-f', '--file_header', default='default')
-    parser.add_argument('-n', '--naming', default='default')
+    parser.add_argument('-c', '--config', default='default_config', help='Config json filename with path')
+    parser.add_argument('-g', '--generate_config', action='store_true', help='Generate config example')
+    parser.add_argument('-t', '--time_interval_sec', default=0, help='Time interval to collect data', type=int)
     parser.add_argument('-o', '--output', default='default')
-    parser.add_argument('-t', '--time_interval_sec', default=0,
-                        help='Time interval to collect data', type=int)
+    parser.add_argument('-p', '--path', default='default', help='File output path')
+    parser.add_argument('-n', '--naming', default='default')
+    parser.add_argument('-f', '--file_header', default='default')
+    parser.add_argument('-i', '--rubis_id', default='default', help='Rubis ID')
+    parser.add_argument('-d', '--delimiter', default='default', help='Delimiter for csv output')
+    parser.add_argument('-a', '--available_boards', default=[],type=int, nargs='+', 
+                        help='Available board numbers e.g., -a 1 3')
     parser.add_argument('-v', '--version', action='store_true')
 
     args = parser.parse_args()
@@ -69,6 +65,8 @@ def main():
         config['output'] = args.output
     if args.rubis_id != 'default':
         config['rubis_id'] = args.rubis_id
+    if args.available_boards != []:
+        config['available_boards'] = args.available_boards
     if args.delimiter == 'space':
         config['delimiter'] = ' '
     elif args.delimiter != 'default':

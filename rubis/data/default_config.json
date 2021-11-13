@@ -29,7 +29,7 @@
         // It will be used when you include "head" in your "naming"
         "file_header": "sc",
 
-        // Time column format (datetime or timestamp)
+        // Time column format (datetime, timestamp or strftime format (for example, "%H:%M:%S")
         "time_format" : "datetime",
 
         // Delimiter
@@ -41,6 +41,7 @@
 
 
         //// ADC boards configuration
+
         // gain is available
         "boards":{
             "1":{
@@ -59,6 +60,7 @@
 
 
         //// configurations for each channels
+
         // 'name' is used for header
         // For 'type', the following options are available
         // 'raw', 'volt', 'V', 'mV', 'linear'
@@ -149,6 +151,7 @@
 
 
         //// Database configuration
+
         // 'login' configurations are used in arguments of pymysql.connect()
         "db":{
             "login":{
@@ -157,6 +160,7 @@
                 "user": "root",
                 "passwd": "newpassword",
                 "autocommit": true},
+
             // database name
             "name": "rubis"
             }
