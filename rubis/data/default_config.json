@@ -1,8 +1,25 @@
 // default_config.json
 // rubis - default configuration 
 {
+        // Output format (csv, db, or both)
+        "output": "csv",
+
         // path to save your text data and configurations
         "path": "./",
+
+        // time interval to take data (sec.)
+        "time_interval_sec": 10,
+
+        // If you don't implement all four ADC boards to rubis,
+        // please put IDs of the available boards.
+        "available_boards": [1,2,3,4],
+
+
+        //// Configurations for formats to save file
+
+        // File naming style
+        // Available keywords: head, date, hash, id, host
+        "naming": "head-date-hash.csv",
 
         // rubis ID to identify your rubis board
         // It will be used when you include "id" in your "naming"
@@ -12,24 +29,19 @@
         // It will be used when you include "head" in your "naming"
         "file_header": "sc",
 
-        // File naming style
-        // Available keywords: head, date, hash, id, host
-        "naming": "head-date-hash.csv",
-        
-        // time interval to take data (sec.)
-        "time_interval_sec": 10,
-
         // Time column format (datetime or timestamp)
         "time_format" : "datetime",
 
-        // If you don't implement all four ADC boards to rubis,
-        // please put IDs of the available boards.
-        "available_boards": [1,2,3,4],
-
-        // Output format (csv, db, or both)
-        "output": "csv",
+        // Delimiter
+        // default ',' generates CSV format
         "delimiter": ",",
+
+        // Additional string is put on the header
         "commentout_string": "",
+
+
+        //// ADC boards configuration
+        // gain is available
         "boards":{
             "1":{
                 "gain": 1
@@ -44,6 +56,14 @@
                 "gain": 1
                 }
         },
+
+
+        //// configurations for each channels
+        // 'name' is used for header
+        // For 'type', the following options are available
+        // 'raw', 'volt', 'V', 'mV', 'linear'
+        // The liniar options require 'a' and 'b' parameters additionally,
+        // the output value is a*(volt)+b
         "sources":{
             "1":{
                 "name": "ch1",
@@ -126,6 +146,10 @@
                 "type": "volt"
             }
         },
+
+
+        //// Database configuration
+        // 'login' configurations are used in arguments of pymysql.connect()
         "db":{
             "login":{
                 "host": "127.0.0.1",
@@ -133,6 +157,7 @@
                 "user": "root",
                 "passwd": "newpassword",
                 "autocommit": true},
+            // database name
             "name": "rubis"
             }
 }
