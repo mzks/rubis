@@ -21,10 +21,12 @@ def main():
     parser.add_argument('-c', '--config', default='default_config', help='Config json filename with path')
     parser.add_argument('-g', '--generate_config', action='store_true', help='Generate config example')
     parser.add_argument('-t', '--time_interval_sec', default=0, help='Time interval to collect data', type=int)
-    parser.add_argument('-o', '--output', default='default')
+    parser.add_argument('-o', '--output', default='default', choices=['default', 'csv', 'db', 'both'],
+                        help='Output style (file or database)')
     parser.add_argument('-p', '--path', default='default', help='File output path')
-    parser.add_argument('-n', '--naming', default='default')
-    parser.add_argument('-f', '--file_header', default='default')
+    parser.add_argument('-n', '--naming', default='default'
+                        help='File naming style e.g., date-hash-id.csv etc.')
+    parser.add_argument('-f', '--file_header', default='default', help='File header')
     parser.add_argument('-i', '--rubis_id', default='default', help='Rubis ID')
     parser.add_argument('-d', '--delimiter', default='default', help='Delimiter for csv output')
     parser.add_argument('-a', '--available_boards', default=[],type=int, nargs='+', 
@@ -39,6 +41,9 @@ def main():
 
     if args.generate_config:
         config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
+        if os.path.exists('./custom_config.json'):
+            print('custom_config.json exists in this directory. Nothing to do.')
+            return
         shutil.copyfile(config_filename, './custom_config.json')
         return
 
