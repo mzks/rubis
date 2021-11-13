@@ -24,7 +24,7 @@ def main():
     parser.add_argument('-o', '--output', default='default', choices=['default', 'csv', 'db', 'both'],
                         help='Output style (file or database)')
     parser.add_argument('-p', '--path', default='default', help='File output path')
-    parser.add_argument('-n', '--naming', default='default'
+    parser.add_argument('-n', '--naming', default='default',
                         help='File naming style e.g., date-hash-id.csv etc.')
     parser.add_argument('-f', '--file_header', default='default', help='File header')
     parser.add_argument('-i', '--rubis_id', default='default', help='Rubis ID')
