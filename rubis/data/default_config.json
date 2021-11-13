@@ -1,11 +1,32 @@
+// default_config.json
+// rubis - default configuration 
 {
+        // path to save your text data and configurations
         "path": "./",
+
+        // rubis ID to identify your rubis board
+        // It will be used when you include "id" in your "naming"
         "rubis_id": "1",
+
+        // file header
+        // It will be used when you include "head" in your "naming"
         "file_header": "sc",
+
+        // File naming style
+        // Available keywords: head, date, hash, id, host
         "naming": "head-date-hash.csv",
+        
+        // time interval to take data (sec.)
         "time_interval_sec": 10,
+
+        // Time column format (datetime or timestamp)
         "time_format" : "datetime",
+
+        // If you don't implement all four ADC boards to rubis,
+        // please put IDs of the available boards.
         "available_boards": [1,2,3,4],
+
+        // Output format (csv, db, or both)
         "output": "csv",
         "delimiter": ",",
         "commentout_string": "",

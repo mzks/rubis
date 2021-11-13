@@ -7,6 +7,14 @@ import pkg_resources
 from rubis.core import run
 
 
+def read_jsonc(filepath:str):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        text = f.read()
+    re_text = re.sub(r'/\*[\s\S]*?\*/|//.*', '', text)
+    json_obj = json.loads(re_text)
+    return json_obj
+
+
 def main():
 
     parser = argparse.ArgumentParser(description='Rubis Control tool')
@@ -48,8 +56,7 @@ def main():
             config_filename = args.config
     print('Use config ' + config_filename)
 
-    with open(config_filename) as f:
-        config = json.load(f)
+    config = read_jsonc(config_filename)
     if args.path != 'default':
         config['path'] = args.path
     if config['path'][-1] != '/':
