@@ -23,14 +23,13 @@ def run(config):
     board_address = {"1": 0x48, "2": 0x49, "3": 0x4A, "4": 0x4B}
     try:
         adss = [ADS.ADS1115(i2c, address=board_address[str(board_id)]) for board_id in config['available_boards']]
-    chs = []
-    for ads, board_id in zip(adss, config['available_boards']):
-        ads.gain = config['boards'][str(board_id)]['gain']
-        chs.append(AnalogIn(ads, ADS.P0))
-        chs.append(AnalogIn(ads, ADS.P1))
-        chs.append(AnalogIn(ads, ADS.P2))
-        chs.append(AnalogIn(ads, ADS.P3))
-
+        chs = []
+        for ads, board_id in zip(adss, config['available_boards']):
+            ads.gain = config['boards'][str(board_id)]['gain']
+            chs.append(AnalogIn(ads, ADS.P0))
+            chs.append(AnalogIn(ads, ADS.P1))
+            chs.append(AnalogIn(ads, ADS.P2))
+            chs.append(AnalogIn(ads, ADS.P3))
     except:
         print('Please check your ADC boards availavility')
         print("See 'available_boards' configuration or '-a'")
