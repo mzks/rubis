@@ -95,8 +95,7 @@ def run(config):
                 f.write(time_str)
 
         if odb:
-            db_data = [now.strftime("%Y-%m-%d %H:%M:%S"), 
-                        "0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",config_hash,config['rubis_id']]
+            db_data = [now.strftime("%Y-%m-%d %H:%M:%S")]+["0"]*16+[config_hash,config['rubis_id']]
 
         for ch, s, ch_st in zip(chs, sources, ch_str):
             value = ch.value
