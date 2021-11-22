@@ -4,6 +4,7 @@ ADC board for 16 channels Slow Control on Raspberry pi.
 This repository provides board design and control software.
 
 ## Demo
+![rubis_demo_comp](https://user-images.githubusercontent.com/12980386/142918966-5d472d8d-8472-4734-a49b-cf35be838ae6.gif)
 <img width="1820" alt="demo" src="https://user-images.githubusercontent.com/12980386/141337443-35ac1b33-6fc7-456a-b7bd-edcf14d8db49.png">
 It is easy to watch your sensors with rubis + Grafana
 
