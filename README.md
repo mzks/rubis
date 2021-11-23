@@ -60,18 +60,17 @@ You can use your custom configuration file with `-c` option.
 Edit them, then run `rubis -c custom_config.json`.
 At the **strong** request of the author's supervisor, the following commands are available to people in CYGNUS (dark matter search experiment) without creating or editing a new configuration file.
 ```
-rubis -c CN1_SM1_config.json
+rubis -c cygnus
 ```
+In addition of `cygnus`, `one_board` and `mysql` configurations are pre-defined.
 
 Some configurations can be overwrited with command line options.
-
 `rubis -h` provides option descriptions.
-
 The output file format is CSV/MySQL.
 
 As a default, the csv files like `sc-20211029-75enrt.csv` are created.
-The `75enrt` is a hash created by configurations.
-`rubis` make files separately for different configurations.
+The `75enrt` is a unique hash created by configurations.
+The hash helps separation not to mix files taken with different configurations.
 The CSV format is like that.
 ```
 time,ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15,ch16
