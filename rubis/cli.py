@@ -35,7 +35,7 @@ def main():
     parser.add_argument('-v', '--version', action='store_true')
 
     args = parser.parse_args()
-    version = '0.7.0'
+    version = '0.7.1'
     if args.version:
         print('rubis version : ' + version)
         return
