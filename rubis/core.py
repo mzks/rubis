@@ -3,36 +3,50 @@ import socket
 import time
 import datetime
 import json
-import board
-import busio
-import adafruit_ads1x15.ads1115 as ADS
-from adafruit_ads1x15.analog_in import AnalogIn
 
 from rubis.hash import deterministic_hash
 
 
-def run(config):
+class dummy_ch:
+    value = 0
+    voltage = 0.0
+
+
+def run(config, dryrun):
 
     config_hash = deterministic_hash(config, 6)
     config_json = open(config['path'] + config_hash + ".json", "w")
     json.dump(config, config_json, indent = 4)
     config_json.close()
 
-    i2c = busio.I2C(board.SCL, board.SDA)
-    # Four boards are inplemented (ADDR <-> GND, Vdd, SDA, SCL)
-    board_address = {"1": 0x48, "2": 0x49, "3": 0x4A, "4": 0x4B}
-    try:
-        adss = [ADS.ADS1115(i2c, address=board_address[str(board_id)]) for board_id in config['available_boards']]
+    if not dryrun:
+        import board
+        import busio
+        import adafruit_ads1x15.ads1115 as ADS
+        from adafruit_ads1x15.analog_in import AnalogIn
+
+        i2c = busio.I2C(board.SCL, board.SDA)
+        # Four boards are inplemented (ADDR <-> GND, Vdd, SDA, SCL)
+        board_address = {"1": 0x48, "2": 0x49, "3": 0x4A, "4": 0x4B}
+        try:
+            adss = [ADS.ADS1115(i2c, address=board_address[str(board_id)]) for board_id in config['available_boards']]
+            chs = []
+            for ads, board_id in zip(adss, config['available_boards']):
+                ads.gain = config['boards'][str(board_id)]['gain']
+                chs.append(AnalogIn(ads, ADS.P0))
+                chs.append(AnalogIn(ads, ADS.P1))
+                chs.append(AnalogIn(ads, ADS.P2))
+                chs.append(AnalogIn(ads, ADS.P3))
+        except:
+            print('Please check your ADC boards availavility')
+            print("See 'available_boards' configuration or '-a'")
+
+    else: # dryrun
+        adss = [board_id for board_id in config['available_boards']]
         chs = []
         for ads, board_id in zip(adss, config['available_boards']):
-            ads.gain = config['boards'][str(board_id)]['gain']
-            chs.append(AnalogIn(ads, ADS.P0))
-            chs.append(AnalogIn(ads, ADS.P1))
-            chs.append(AnalogIn(ads, ADS.P2))
-            chs.append(AnalogIn(ads, ADS.P3))
-    except:
-        print('Please check your ADC boards availavility')
-        print("See 'available_boards' configuration or '-a'")
+            for i in range(4):
+                chs.append(dummy_ch())
 
     sources, ch_str = [], []
     for board_id in config['available_boards']:
@@ -40,6 +54,7 @@ def run(config):
             ch_id = str((int(board_id) - 1) * 4 + ch + 1)
             ch_str.append(ch_id)
             sources.append(config['sources'][ch_id])
+
 
     print('Data taking on the hash '+config_hash)
 

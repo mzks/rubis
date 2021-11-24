@@ -31,6 +31,7 @@ def main():
     parser.add_argument('-d', '--delimiter', default='default', help='Delimiter for csv output')
     parser.add_argument('-a', '--available_boards', default=[],type=int, nargs='+', 
                         help='Available board numbers e.g., -a 1 3')
+    parser.add_argument('-r', '--dryrun', action='store_true')
     parser.add_argument('-v', '--version', action='store_true')
 
     args = parser.parse_args()
@@ -81,7 +82,7 @@ def main():
     if args.time_interval_sec > 0:
         config['time_interval_sec'] = args.time_interval_sec
 
-    run(config)
+    run(config, args.dryrun)
 
 
 if __name__ == "__main__":

@@ -85,6 +85,10 @@ time,ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15,ch16
 2021-10-29 00:57:54, 0.5478917, 0.5483917, 0.5480167, 0.5480167, 0.5441416, 0.5438916, 0.5440166, 0.5442666, 0.5491418, 0.5488918, 0.5488918, 0.5481417, 0.5450166, 0.5443916, 0.5441416, 0.5442666
 ```
 
+The `-r` option makes "dry-run".
+With the option, this rubis works on general system not raspberry pi even without ADS board.
+It helps to know how rubis works.
+
 For analysis with pandas dataframe, it is easy to extract the csv files.
 ```
 import pandas as pd
