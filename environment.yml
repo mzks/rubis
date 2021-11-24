@@ -1,0 +1,8 @@
+name: base
+channels:
+- anaconda
+dependencies:
+- python=3.7
+- pip:
+  - PyMySQL
+  - adafruit-circuitpython-ads1x15
