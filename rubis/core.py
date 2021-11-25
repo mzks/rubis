@@ -1,15 +1,27 @@
 import os, sys
 import socket
 import time
+import math
 import datetime
 import json
 
 from rubis.hash import deterministic_hash
 
 
+
 class dummy_ch:
-    value = 0
-    voltage = 0.0
+    def __init__(self):
+        self._t = 0
+
+    @property
+    def value(self):
+        self._t += 1
+        return 32768 + int(1000 * math.sin(self._t/20))
+
+    @property
+    def voltage(self):
+        self._t += 1
+        return 2. + 1. * math.sin(self._t/20)
 
 
 def run(config, dryrun):
