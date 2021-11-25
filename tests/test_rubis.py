@@ -27,6 +27,11 @@ def test_rubis():
 
     assert not df.empty
 
+def test_raw():
+    pro = subprocess.Popen(["rubis", "-r", "-c", "raw", "-a" ,"1", "-t", "1"], preexec_fn=os.setsid)
+    sleep(3)
+    os.killpg(os.getpgid(pro.pid), signal.SIGTERM)
+
 
 if __name__ == '__main__':
     test_rubis()
