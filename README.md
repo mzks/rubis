@@ -89,6 +89,8 @@ The `-r` option makes "dry-run".
 With the option, this rubis works on general system not raspberry pi even without ADS board.
 It helps to know how rubis works.
 
+The `-q` option kill all rubis processes.
+
 For analysis with pandas dataframe, it is easy to extract the csv files.
 ```
 import pandas as pd
