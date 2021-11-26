@@ -31,6 +31,7 @@ def main():
     parser.add_argument('-d', '--delimiter', default='default', help='Delimiter for csv output')
     parser.add_argument('-a', '--available_boards', default=[],type=int, nargs='+', 
                         help='Available board numbers e.g., -a 1 3')
+    parser.add_argument('-q', '--quit', action='store_true', help='Kill all running rubis')
     parser.add_argument('-r', '--dryrun', action='store_true')
     parser.add_argument('-v', '--version', action='store_true')
 
@@ -38,6 +39,18 @@ def main():
     version = '0.7.1'
     if args.version:
         print('rubis version : ' + version)
+        return
+
+    if args.quit:
+        import psutil
+        pids = psutil.pids()
+        for pid in pids:
+            try:
+                p = psutil.Process(pid)
+                if ''.join(p.cmdline()).find('rubis') != -1:
+                p.kill()
+            except:
+                pass 
         return
 
     if args.generate_config:
