@@ -48,7 +48,7 @@ def main():
             try:
                 p = psutil.Process(pid)
                 if ''.join(p.cmdline()).find('rubis') != -1:
-                p.kill()
+                    p.kill()
             except:
                 pass 
         return
