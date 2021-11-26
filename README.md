@@ -90,6 +90,7 @@ With the option, this rubis works on general system not raspberry pi even withou
 It helps to know how rubis works.
 
 The `-q` option kill all rubis processes.
+With the `-s` option, rubis uses the stored cofiguration used in the previous run.
 
 For analysis with pandas dataframe, it is easy to extract the csv files.
 ```

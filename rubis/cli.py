@@ -31,8 +31,9 @@ def main():
     parser.add_argument('-d', '--delimiter', default='default', help='Delimiter for csv output')
     parser.add_argument('-a', '--available_boards', default=[],type=int, nargs='+', 
                         help='Available board numbers e.g., -a 1 3')
-    parser.add_argument('-q', '--quit', action='store_true', help='Kill all running rubis')
     parser.add_argument('-r', '--dryrun', action='store_true')
+    parser.add_argument('-s', '--stored', action='store_true', help='Use the previous configuration stored')
+    parser.add_argument('-q', '--quit', action='store_true', help='Kill all running rubis')
     parser.add_argument('-v', '--version', action='store_true')
 
     args = parser.parse_args()
@@ -69,6 +70,14 @@ def main():
             pass
         else:
             config_filename = args.config
+
+    if args.stored:
+        config_filename = pkg_resources.resource_filename('rubis','data') + '/.previous_config.json'
+        if os.path.exists(config_filename):
+            pass
+        else:
+            config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
+
     print('Use config ' + config_filename)
 
     config = read_jsonc(config_filename)
@@ -94,6 +103,11 @@ def main():
         config['delimiter'] = ' '
     if args.time_interval_sec > 0:
         config['time_interval_sec'] = args.time_interval_sec
+
+    filename = pkg_resources.resource_filename('rubis','data') + '/.previous_config.json'
+    config_json = open(filename, "w")
+    json.dump(config, config_json, indent = 4)
+    config_json.close()
 
     run(config, args.dryrun)
 
