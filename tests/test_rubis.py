@@ -15,8 +15,8 @@ def test_generate_config():
 
 
 def test_rubis():
-    subprocess.Popen(["rubis", "-r", "-c", "custom_config.json", "-a" ,"1", "-t", "1"], preexec_fn=os.setsid)
-    sleep(10)
+    subprocess.Popen(["rubis", "-r", "-c", "custom_config.json", "-a" ,"1", "-t", "0.1"], preexec_fn=os.setsid)
+    sleep(3)
     subprocess.run(['rubis', '-q'])
 
     assert len(glob('./*.json')) > 0

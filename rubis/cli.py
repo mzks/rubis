@@ -20,7 +20,7 @@ def main():
     parser = argparse.ArgumentParser(description='Rubis Control tool')
     parser.add_argument('-c', '--config', default='default_config', help='Config json filename with path')
     parser.add_argument('-g', '--generate_config', action='store_true', help='Generate config example')
-    parser.add_argument('-t', '--time_interval_sec', default=0, help='Time interval to collect data', type=int)
+    parser.add_argument('-t', '--time_interval_sec', default=0., help='Time interval to collect data', type=float)
     parser.add_argument('-o', '--output', default='default', choices=['default', 'csv', 'db', 'both'],
                         help='Output style (file or database)')
     parser.add_argument('-p', '--path', default='default', help='File output path')
