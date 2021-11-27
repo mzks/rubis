@@ -47,7 +47,10 @@ def main():
     if args.quit:
         import psutil
         pids = psutil.pids()
+        self_pid = os.getpid()
         for pid in pids:
+            if pid == self_pid:
+                continue
             try:
                 p = psutil.Process(pid)
                 cmd = ''.join(p.cmdline())
