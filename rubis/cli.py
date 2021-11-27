@@ -48,7 +48,8 @@ def main():
         for pid in pids:
             try:
                 p = psutil.Process(pid)
-                if ''.join(p.cmdline()).find('rubis') != -1:
+                cmd = ''.join(p.cmdline())
+                if (cmd.find('rubis') != -1) & (cmd.find('rubis-q')==-1):
                     p.kill()
             except:
                 pass 
