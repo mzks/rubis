@@ -33,5 +33,9 @@ def test_raw():
     os.killpg(os.getpgid(pro.pid), signal.SIGTERM)
 
 
+def test_log():
+    subprocess.run(["rubis", "-l"])
+
+
 if __name__ == '__main__':
     test_rubis()
