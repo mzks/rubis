@@ -4,6 +4,8 @@ import time
 import math
 import datetime
 import json
+import pkg_resources
+import pathlib
 
 from rubis.hash import deterministic_hash
 
@@ -69,6 +71,8 @@ def run(config, dryrun):
 
 
     print('Data taking on the hash '+config_hash)
+    a_path = str(pathlib.Path(config['path']).resolve())
+    add_log('Start on hash ' + config_hash +' in ' + a_path + ' PID :' + str(os.getpid()))
 
     ocsv, odb = True, False
     if config['output'] == 'db':
@@ -185,3 +189,22 @@ def get_outfilename(config, config_hash, date):
 
     outfilename = config['path'] + outfilename    
     return outfilename
+
+
+def add_log(log:str):
+    logfile = pkg_resources.resource_filename('rubis','data') + '/rubis.log'
+    with open(logfile, mode='a') as f:
+        now = datetime.datetime.now()
+        f.write(now.strftime("[%Y-%m-%d %H:%M:%S] "))
+        f.write(log)
+        f.write('\n')
+    return
+
+
+def show_log():
+    logfile = pkg_resources.resource_filename('rubis','data') + '/rubis.log'
+    with open(logfile, 'r', encoding='utf-8') as f:
+        text = f.read()
+    print(text)
+    return
+

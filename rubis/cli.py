@@ -4,8 +4,9 @@ import json
 from glob import glob
 import shutil
 import pkg_resources
-from rubis.core import run
 
+from rubis.core import run, add_log, show_log
+from rubis.hash import deterministic_hash
 
 def read_jsonc(filepath:str):
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -33,6 +34,7 @@ def main():
                         help='Available board numbers e.g., -a 1 3')
     parser.add_argument('-r', '--dryrun', action='store_true')
     parser.add_argument('-s', '--stored', action='store_true', help='Use the previous configuration stored')
+    parser.add_argument('-l', '--log', action='store_true', help='Show all log')
     parser.add_argument('-q', '--quit', action='store_true', help='Kill all running rubis')
     parser.add_argument('-v', '--version', action='store_true')
 
@@ -53,6 +55,10 @@ def main():
                     p.kill()
             except:
                 pass 
+        return
+
+    if args.log:
+        show_log()
         return
 
     if args.generate_config:
