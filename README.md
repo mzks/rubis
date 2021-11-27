@@ -89,6 +89,9 @@ The `-r` option makes "dry-run".
 With the option, this rubis works on general system not raspberry pi even without ADS board.
 It helps to know how rubis works.
 
+The `-l` option show rubis log.
+It helps to find the logfile place and configuration with hash.
+
 The `-q` option kill all rubis processes.
 With the `-s` option, rubis uses the stored cofiguration used in the previous run.
 

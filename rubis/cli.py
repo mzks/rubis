@@ -32,7 +32,7 @@ def main():
     parser.add_argument('-d', '--delimiter', default='default', help='Delimiter for csv output')
     parser.add_argument('-a', '--available_boards', default=[],type=int, nargs='+', 
                         help='Available board numbers e.g., -a 1 3')
-    parser.add_argument('-r', '--dryrun', action='store_true')
+    parser.add_argument('-r', '--dryrun', action='store_true', help='Generate dummy files even not on RaspPi.')
     parser.add_argument('-s', '--stored', action='store_true', help='Use the previous configuration stored')
     parser.add_argument('-l', '--log', action='store_true', help='Show all log')
     parser.add_argument('-q', '--quit', action='store_true', help='Kill all running rubis')
