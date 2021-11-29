@@ -1,14 +1,14 @@
-import os, re, ast
+import os
+import re
 import argparse
 import json
-from glob import glob
 import shutil
 import pkg_resources
 
 from rubis.core import run, add_log, show_log
-from rubis.hash import deterministic_hash
 
-def read_jsonc(filepath:str):
+
+def read_jsonc(filepath: str):
     with open(filepath, 'r', encoding='utf-8') as f:
         text = f.read()
     re_text = re.sub(r'/\*[\s\S]*?\*/|//.*', '', text)
@@ -30,7 +30,7 @@ def main():
     parser.add_argument('-f', '--file_header', default='default', help='File header')
     parser.add_argument('-i', '--rubis_id', default='default', help='Rubis ID')
     parser.add_argument('-d', '--delimiter', default='default', help='Delimiter for csv output')
-    parser.add_argument('-a', '--available_boards', default=[],type=int, nargs='+', 
+    parser.add_argument('-a', '--available_boards', default=[], type=int, nargs='+',
                         help='Available board numbers e.g., -a 1 3')
     parser.add_argument('-r', '--dryrun', action='store_true', help='Generate dummy files even not on RaspPi.')
     parser.add_argument('-s', '--stored', action='store_true', help='Use the previous configuration stored')
@@ -54,10 +54,11 @@ def main():
             try:
                 p = psutil.Process(pid)
                 cmd = ''.join(p.cmdline())
-                if (cmd.find('rubis') != -1) & (cmd.find('rubis-q')==-1):
+                if (cmd.find('rubis') != -1) & (cmd.find('rubis-q') == -1):
                     p.kill()
+                    add_log('Killed PID: ' + str(pid))
             except:
-                pass 
+                pass
         return
 
     if args.log:
@@ -65,7 +66,7 @@ def main():
         return
 
     if args.generate_config:
-        config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
+        config_filename = pkg_resources.resource_filename('rubis', 'data') + '/default_config.json'
         if os.path.exists('./custom_config.json'):
             print('custom_config.json exists in this directory. Nothing to do.')
             return
@@ -73,20 +74,20 @@ def main():
         return
 
     if args.config == 'default_config':
-        config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
+        config_filename = pkg_resources.resource_filename('rubis', 'data') + '/default_config.json'
     else:
-        config_filename = pkg_resources.resource_filename('rubis','data') + '/' + args.config
+        config_filename = pkg_resources.resource_filename('rubis', 'data') + '/' + args.config
         if os.path.exists(config_filename):
             pass
         else:
             config_filename = args.config
 
     if args.stored:
-        config_filename = pkg_resources.resource_filename('rubis','data') + '/.previous_config.json'
+        config_filename = pkg_resources.resource_filename('rubis', 'data') + '/.previous_config.json'
         if os.path.exists(config_filename):
             pass
         else:
-            config_filename = pkg_resources.resource_filename('rubis','data') + '/default_config.json'
+            config_filename = pkg_resources.resource_filename('rubis', 'data') + '/default_config.json'
 
     print('Use config ' + config_filename)
 
@@ -103,7 +104,7 @@ def main():
         config['output'] = args.output
     if args.rubis_id != 'default':
         config['rubis_id'] = args.rubis_id
-    if args.available_boards != []:
+    if args.available_boards:
         config['available_boards'] = args.available_boards
     if args.delimiter == 'space':
         config['delimiter'] = ' '
@@ -114,9 +115,9 @@ def main():
     if args.time_interval_sec > 0:
         config['time_interval_sec'] = args.time_interval_sec
 
-    filename = pkg_resources.resource_filename('rubis','data') + '/.previous_config.json'
+    filename = pkg_resources.resource_filename('rubis', 'data') + '/.previous_config.json'
     config_json = open(filename, "w")
-    json.dump(config, config_json, indent = 4)
+    json.dump(config, config_json, indent=4)
     config_json.close()
 
     run(config, args.dryrun)
