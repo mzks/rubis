@@ -4,12 +4,15 @@ ADC board for 16 channels Slow Control on Raspberry pi.
 This repository provides board design and control software.
 
 ## Demo
+ - 30 seconds to start
 ![rubis_demo_comp](https://user-images.githubusercontent.com/12980386/142918966-5d472d8d-8472-4734-a49b-cf35be838ae6.gif)
+
+ - Web watching demo
 <img width="1820" alt="demo" src="https://user-images.githubusercontent.com/12980386/141337443-35ac1b33-6fc7-456a-b7bd-edcf14d8db49.png">
 It is easy to watch your sensors with rubis + Grafana
 
+ - PCB view on Raspbery Pi
 <img src="https://user-images.githubusercontent.com/12980386/138100032-73b48425-1298-4935-a816-715054cd197c.png" width="400">
-<img src="https://user-images.githubusercontent.com/12980386/138100048-b96825b0-636b-4689-a27d-31d813c87a6c.png" width="400">
 
 
 ## Feature
@@ -17,16 +20,22 @@ It is easy to watch your sensors with rubis + Grafana
  - Standalone
  - Inexpensive
  - Multi channels (16 ch) and additional connectors (4 ch)
- - Including software (This!)
+ - Including CLI software (This!)
 
 ## Hardware components
  - rubis board - less than 5 dollars at elecrow 
+ - Raspberry Pi (1B+, 2B, 3B, 3B+, 4B, Zero)
  - [PIN Socket](https://akizukidenshi.com/catalog/g/gC-00085/) 
  - [ADC Board](https://www.marutsu.co.jp/pc/i/574270/) * 1--4 / 20 dollers per board
  - [BNC Connector](https://akizukidenshi.com/catalog/g/gC-00134/) ( * 4, optional)
  - [SMA Connector](https://akizukidenshi.com/catalog/g/gC-02569/) ( * 4, optional)
  - LEMO Connector (Optional)
 
+## Hardware
+
+ - [[https://github.com/mzks/rubis/blob/main/hardware/rubis_circuit.pdf| Circuit diagram]]
+ - [[https://github.com/mzks/rubis/blob/main/hardware/rubis.step| 3D view]]
+ - [[https://github.com/mzks/rubis/blob/main/hardware| KiCad files]]
 
 ## Software
 
