@@ -33,9 +33,10 @@ It is easy to watch your sensors with rubis + Grafana
 
 ## Hardware
 
- - [[https://github.com/mzks/rubis/blob/main/hardware/rubis_circuit.pdf| Circuit diagram]]
- - [[https://github.com/mzks/rubis/blob/main/hardware/rubis.step| 3D view]]
- - [[https://github.com/mzks/rubis/blob/main/hardware| KiCad files]]
+You need to connect the four GPIO pins arranged in a square (Pin 3 -- SDA, Pin 4 -- 5V, Pin 5 -- SCL, Pin 6 -- GND).
+ - [Circuit diagram](https://github.com/mzks/rubis/blob/main/hardware/rubis_circuit.pdf)
+ - [3D view](https://github.com/mzks/rubis/blob/main/hardware/rubis.step)
+ - [KiCad files](https://github.com/mzks/rubis/blob/main/hardware)
 
 ## Software
 
