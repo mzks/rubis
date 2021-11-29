@@ -5,6 +5,7 @@ This repository provides board design and control software.
 
 ## Demo
  - 30 seconds to start
+
 ![rubis_demo_comp](https://user-images.githubusercontent.com/12980386/142918966-5d472d8d-8472-4734-a49b-cf35be838ae6.gif)
 
  - Web watching demo
