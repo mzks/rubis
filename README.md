@@ -1,4 +1,11 @@
 # rubis
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/mzks/rubis?include_prereleases)
+[![Downloads](https://static.pepy.tech/personalized-badge/rubis?period=total&units=abbreviation&left_color=black&right_color=brightgreen&left_text=Downloads)](https://pepy.tech/project/rubis)
+[![CLI test](https://github.com/mzks/rubis/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/mzks/rubis/actions/workflows/python-package-conda.yml)
+![PyPI - License](https://img.shields.io/pypi/l/rubis)
+![GitHub repo size](https://img.shields.io/github/repo-size/mzks/rubis)
+![GitHub watchers](https://img.shields.io/github/watchers/mzks/rubis?style=social)
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/mzks/rubis/main)
 
 ADC board for 16 channels Slow Control on Raspberry pi.
 This repository provides board design and control software.
