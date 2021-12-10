@@ -187,9 +187,9 @@ If you need static IP access, please edit `/etc/dhcpcd.conf` like this.
 ```
 # Example static IP configuration:
 interface eth0
-static ip_address=xx.xx.xx.xx/23 # your IP
-static routers=xx.xx.xx.xx # your gateway
-static domain_name_servers=xx.xx.xx.xx xx.xx.xx.xx # your DNS
+static ip_address=***.***.***.***/** # your IP/mask
+static routers=***.***.***.*** # your gateway
+static domain_name_servers=***.***.***.*** ***.***.***.*** # your DNS
 ```
 
 When you set `"db"` or `"both"` for `output` in config file, the following settings are required.
