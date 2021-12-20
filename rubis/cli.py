@@ -33,10 +33,12 @@ def main():
     parser.add_argument('-a', '--available_boards', default=[], type=int, nargs='+',
                         help='Available board numbers e.g., -a 1 3')
     parser.add_argument('-r', '--dryrun', action='store_true', help='Generate dummy files even not on RaspPi.')
+    parser.add_argument('-b', '--booked', default=None, help='Find configure file booked.')
     parser.add_argument('-s', '--stored', action='store_true', help='Use the previous configuration stored')
     parser.add_argument('-l', '--log', action='store_true', help='Show all log')
     parser.add_argument('-q', '--quit', action='store_true', help='Kill all running rubis')
     parser.add_argument('-v', '--version', action='store_true')
+    # ejkmquwxyz
 
     args = parser.parse_args()
     version = '1.0.0'
@@ -63,6 +65,14 @@ def main():
 
     if args.log:
         show_log()
+        return
+
+    if args.booked != None:
+        config_filename = pkg_resources.resource_filename('rubis', 'data') + '/' + args.booked + '.json'
+        if os.path.exists(config_filename):
+            shutil.copyfile(config_filename, './'+args.booked+'.json')
+        else:
+            print(args.booked + '.json does not exist. Nothing to do.')
         return
 
     if args.generate_config:
