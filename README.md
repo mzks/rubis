@@ -110,6 +110,9 @@ It helps to know how rubis works.
 The `-l` option show rubis log.
 It helps to find the logfile place and configuration with hash.
 
+If you miss a config to generate hash, `-b` option helps you.
+`rubis -b g2hlpc` generates the config file run before.
+
 The `-q` option kill all rubis processes.
 With the `-s` option, rubis uses the stored cofiguration used in the previous run.
 
