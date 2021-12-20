@@ -10,7 +10,6 @@ import pathlib
 from rubis.hash import deterministic_hash
 
 
-
 class dummy_ch:
     def __init__(self):
         self._t = 0
@@ -30,6 +29,10 @@ def run(config, dryrun):
 
     config_hash = deterministic_hash(config, 6)
     config_json = open(config['path'] + config_hash + ".json", "w")
+    json.dump(config, config_json, indent = 4)
+    config_json.close()
+
+    config_json = open(pkg_resources.resource_filename('rubis', 'data') + '/' + config_hash + ".json", "w")
     json.dump(config, config_json, indent = 4)
     config_json.close()
 
